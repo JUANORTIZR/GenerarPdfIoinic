@@ -1,0 +1,7 @@
+{
+  "name": "saveFileC",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
