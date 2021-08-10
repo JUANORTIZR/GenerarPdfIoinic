@@ -17,4 +17,14 @@
     <strong>Ready to create an app?</strong>
     <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
   </div>
+
+  <ion-button (click)="createPdf()"  expand="block" fill="clear" shape="round">
+    Generar
+  </ion-button>
+  <ion-button (click)="downloadPdf()" *ngIf="pdfObject" expand="block" fill="clear" shape="round">
+   Descargar
+  </ion-button>
+  <ion-button (click)="openPdf()" *ngIf="pdfObject" expand="block" fill="clear" shape="round">
+   Abrir
+  </ion-button>
 </ion-content>

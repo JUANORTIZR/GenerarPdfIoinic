@@ -1,0 +1,6 @@
+{
+	"appId": "io.ionic.starter",
+	"appName": "saveFileC",
+	"webDir": "www",
+	"bundledWebRuntime": false
+}
