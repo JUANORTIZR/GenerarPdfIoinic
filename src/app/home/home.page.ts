@@ -12,6 +12,7 @@ import { Directory } from '@capacitor/filesystem';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-home',
@@ -21,25 +22,48 @@ import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
 export class HomePage implements OnInit {
 
   pdfObject: any;
+  logoData:any;
   constructor(
     private plt: Platform
     , private fileOpener: FileOpener
     , private androidPermissions: AndroidPermissions
+    , private htpp: HttpClient
     ) { }
 
   ngOnInit() {
 
+    this.loadLocalAssetTobase64();
+  }
+
+  loadLocalAssetTobase64(){
+    this.htpp.get('./assets/Logo/logo.jpeg', {responseType: 'blob'})
+    .subscribe(res => {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        this.logoData = reader.result;
+      }
+      reader.readAsDataURL(res);
+    })
   }
 
   createPdf() {
+
     const docDefinitions = {
       watermark: { text: 'AGRORGANICO SEMILLAS', color: 'green', italic: true },
       content: [
         {
           columns: [
             {
-              text: 'Holis',
+              image:this.logoData,
+              width: 100,
+              alignment: 'right'
+            },
+            {
+              text: new Date().toTimeString(),
               alignment: 'center'
+            },
+            {
+
             }
         ]
         }
